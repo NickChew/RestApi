@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const {createMovie, listMovies, updatedMovie, deleteMovie} = require("./movieControllers");
-// const {login} = require("../user/userControllers");
+const {login, userName} = require("../user/userControllers");
 const {hashPass, comparePass, tokenCheck} = require("../middleware");
 
 const movieRouter = Router();
