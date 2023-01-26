@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../user/userModels");
-const Movie = require("../movies/movieModels");
+// const Movie = require("../movies/movieModels");
 
 exports.hashPass = async (request,response,next) => {
   try {

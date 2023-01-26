@@ -2,7 +2,6 @@ const User = require("./userModels");
 const jwt = require("jsonwebtoken");
 
 exports.createUser = async (request, response) => {
-  // console.log(request);
   try {
     const newUser = await User.create(request.body);
     const token = jwt.sign({_id: newUser._id}, process.env.SECRET_KEY);//creates the token using the secret key
