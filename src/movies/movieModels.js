@@ -12,7 +12,7 @@ const movieSchema = new mongoose.Schema ({
     type: String,
     unique: false,
     required: false,
-    default: "Unknown actor"
+    default: "Unknown Actor"
   }
   
 });
