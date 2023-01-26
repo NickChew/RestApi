@@ -1,19 +1,10 @@
 const Movie = require("./movieModels");
 const jwt = require("jsonwebtoken");
 
-// exports.login = async (request,response) => {
-//   try {
-//     const token = jwt.sign({_id: request.user._id},process.env.SECRET_KEY);
-//     response.send({user: request.user.username, token});
-//   } catch (error) {
-//     console.log(error);
-//     response.status(401).send({error: error.message})
-//   };
-// };
-
 exports.createMovie = async (request, response) => {
+   console.log(request.body);
   try {
-    const newMovie = await Movie.create(request.body);
+    const newMovie = await Movie.create({movieName: request.body.movieName});
     response.status(201).send({movie: newMovie});
   } catch (error) {
     console.log(error);
@@ -43,15 +34,13 @@ exports.deleteMovie = async (request,response) => {
   };
 };
 
-exports.updatedMovie = async (request,response) => {
+exports.updateActor = async (request, response) => {
   try {
-    //code with update/replace user email goes here
-    const updMovie = await Movie.updateOne(
-      {moviename: request.body.moviename}
-    );
-  response.status(200).send({message:"Success",updMovie})
+      await Movie.updateOne({movieName: request.body.movieName}, {actor: request.body.actor}),
+      response.send({msg: `Actor updated for ${request.body.movieName}`});
   } catch (error) {
-    console.log(error);
-    response.status(500).send({error: error.message})
+      console.log(error);
+      response.status(401).send({error: error.message});
   };
 };
+

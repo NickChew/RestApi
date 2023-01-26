@@ -1,16 +1,19 @@
 const mongoose = require("mongoose");
 
 const movieSchema = new mongoose.Schema ({
-  // userName: {
-  //   type: String,
-  //   required: true,
-  //   unique: true
-  // },
+
   movieName: {
     type: String,
     required: true,
     unique: true
   },
+
+  actor: {
+    type: String,
+    unique: false,
+    required: false,
+    default: "Unknown actor"
+  }
   
 });
 

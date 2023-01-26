@@ -26,7 +26,7 @@ exports.comparePass = async (request,response,next) => {
     console.log(request.user);
     //This pulls the user info from the databse including the hashed password
     const passCheck = await bcrypt.compare(request.body.password, request.user.password)
-    console.log(passCheck);
+    // console.log(passCheck);
     //This compares the unhashed password in the resquest body to the hashed password we stored in request.user
     if (request.user && passCheck) {
       console.log("username exists and password is correct");
@@ -50,7 +50,7 @@ exports.tokenCheck = async ( request, response, next) => {
     // console.log(token);
     const decodedToken = jwt.verify(token,process.env.SECRET_KEY);
     const user = await User.findById(decodedToken._id);
-    console.log(user);
+    // console.log(user);
     if (user) {
       request.user = user;
       next()
