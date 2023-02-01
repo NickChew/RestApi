@@ -22,8 +22,10 @@ exports.hashPass = async (request,response,next) => {
 
 exports.comparePass = async (request,response,next) => {
   try {
+    // console.log(request.body);
     request.user = await User.findOne({username: request.body.username});
-    console.log(request.user);
+    // console.log(request.user);
+    // console.log(request.body);
     //This pulls the user info from the databse including the hashed password
     const passCheck = await bcrypt.compare(request.body.password, request.user.password)
     // console.log(passCheck);
@@ -37,7 +39,7 @@ exports.comparePass = async (request,response,next) => {
   } catch (error) {
     console.log(error);
     response.status(401).send({error: error.message})
-  };
+  }
 };
 
 exports.tokenCheck = async ( request, response, next) => {
@@ -50,7 +52,7 @@ exports.tokenCheck = async ( request, response, next) => {
     // console.log(token);
     const decodedToken = jwt.verify(token,process.env.SECRET_KEY);
     const user = await User.findById(decodedToken._id);
-    // console.log(user);
+    console.log(user);
     if (user) {
       request.user = user;
       next()
@@ -60,5 +62,5 @@ exports.tokenCheck = async ( request, response, next) => {
   } catch (error) {
     console.log(error);
     response.status(500).send({error: error.message});
-  };
+  }
 };
