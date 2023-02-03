@@ -8,7 +8,7 @@ userRouter.get("/listUser", tokenCheck, listUsers);
 userRouter.post("/addUser", hashPass, createUser);
 userRouter.post("/login", comparePass, login);  //gets token etc
 userRouter.put("/update", updatedEmail);
-userRouter.delete("/deleteUser", deleteUser);
+userRouter.delete("/deleteUser", comparePass, deleteUser);
 userRouter.get("/authCheck", tokenCheck, login);
 
 module.exports = userRouter;
